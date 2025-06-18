@@ -1,0 +1,36 @@
+name: Snyk Open Source Scan
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  snyk:
+    name: Snyk Security Scan
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Check out your repository
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. Set up your Node.js environment
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      # 3. Install your dependencies (including nodejs-goof)
+      - name: Install dependencies
+        run: npm ci
+
+      # 4. Run Snyk test 
+      - name: Run Snyk to test for vulnerabilities
+        uses: snyk/actions/node@v3
+        with:
+          # `test` will fail the build if vulnerabilities are found
+          command: test
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
