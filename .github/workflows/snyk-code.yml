@@ -26,6 +26,6 @@ jobs:
       - name: Run Snyk Code Test
         uses: snyk/actions/github-action@main
         with:
-          command: code
+          command: code test
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
