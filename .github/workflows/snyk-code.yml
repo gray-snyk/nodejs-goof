@@ -24,7 +24,7 @@ jobs:
         run: npm ci
 
       - name: Run Snyk Code Test
-        uses: snyk/actions/setup@master
+        uses: snyk/actions/sast
         with:
           command: code
         env:
