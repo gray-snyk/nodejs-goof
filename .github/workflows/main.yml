@@ -12,25 +12,25 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Check out your repository
+      # 1. Check out your repo
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # 2. Set up your Node.js environment
+      # 2. Set up Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '18'
 
-      # 3. Install your dependencies (including nodejs-goof)
+      # 3. Install dependencies (including your nodejs-goof library)
       - name: Install dependencies
         run: npm ci
 
-      # 4. Run Snyk test 
+      # 4. Run Snyk test
       - name: Run Snyk to test for vulnerabilities
-        uses: snyk/actions/node@v3
+        uses: snyk/actions/node@master
         with:
-          # `test` will fail the build if vulnerabilities are found
+          # `test` fails if vulnerabilities are found
           command: test
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
