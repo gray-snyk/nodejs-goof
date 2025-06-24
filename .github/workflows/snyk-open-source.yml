@@ -26,6 +26,7 @@ jobs:
       - name: Run Snyk Open Source Test
         uses: snyk/actions/node@master
         with:
-          command: test --severity-threshold=high 
+          command: test 
+          args: --severity-threshold=high
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
